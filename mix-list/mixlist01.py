@@ -18,3 +18,15 @@ iplist = [ 5060, "80", 55, "10.0.0.1", "10.20.30.1", "ssh" ]
 
 # print only ip address from list
 print(f"IP addresses: {iplist[3]}, and {iplist[4]}")
+
+wordbank= ["indentation", "spaces"]
+
+tlgstudents= ['Albert', 'Anthony', 'Brenden', 'Craig', 'Deja', 'Elihu', 'Eric', 'Giovanni', 'James', 'Joshua', 'Maria', 'Mohamed', 'PJ', 'Philip', 'Sagan', 'Suchit', 'Meka', 'Trey', 'Winton', 'Xiuxiang', 'Yaping']
+
+wordbank.append(4)
+
+num = int(input("Please give a number between 0 and 20\n"))
+
+student_name = tlgstudents[num]
+
+print(f"{student_name} always uses {str(wordbank[-1])} {str(wordbank[1])} to indent.")
