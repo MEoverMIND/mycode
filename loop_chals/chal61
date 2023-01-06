@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+
+def main():
+  bottle = 101
+  while bottle >= 100:
+    bottle = int(input("how many beer?(enter less than 100)"))
+  for beer in range(bottle,0,-1):
+    print(f'{beer} bottles of beer on the wall! {beer} bottles of beer on the wall! {beer}  bottles of beer! You take one down, pass it around!')
+
+if __name__ == "__main__":
+  main()
