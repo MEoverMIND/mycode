@@ -1,0 +1,46 @@
+#!/usr/bin/python3
+"""Review of try and except logic | Alta3 Research"""
+
+def main():
+
+    # This is an array of dicts that also has dicts that have an array as its value
+    farms = [{"name": "NE Farm", "agriculture": ["sheep", "cows", "pigs", "chickens", "llamas", "cats"]},
+         {"name": "W Farm", "agriculture": ["pigs", "chickens", "llamas"]},
+         {"name": "SE Farm", "agriculture": ["chickens", "carrots", "celery"]}]
+
+    # storing the value of the array of NE Farm
+    NE_animals= farms[0]["agriculture"]
+    for animal in NE_animals:
+        print(animal)
+
+    # looping through the names of the farms and asking user to choose one through input
+    for farm in farms:
+        print("-", farm["name"])
+    choice= input("Pick a farm!\n")
+    
+    # comparing the name the use put to each iteration of the farms list until a match is found
+    for farm in farms:
+        if farm["name"].lower() == choice.lower():
+            print(farm)
+
+
+    yuck= ["carrots", "celery"]
+
+    for farm in farms:
+        print("-", farm["name"])
+    choice= input("Pick a farm!\n")
+
+    for farm in farms:
+        if farm["name"].lower() == choice.lower():
+            for ag_item in farm["agriculture"]:
+                if ag_item not in yuck:
+                     print(ag_item)
+
+
+
+
+
+
+if __name__ == "__main__":
+    main()
+
