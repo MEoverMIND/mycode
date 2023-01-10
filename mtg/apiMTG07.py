@@ -26,7 +26,7 @@ def main():
 
     # the .json() method will dump a JSON string into Pythonic data structures. COOL!
     # This is much easier than using the urllib.request library
-    cardsets = resp.json().get("cards")
+    cardsets = resp.json().get(":wcards")
     # open a file we write our data into
     with open("mtgsetcards.index", "w") as mtgfile:
         for cardset in cardsets:  # loop across ALL of the sets of MTG cards (they are stored as dict objects)
