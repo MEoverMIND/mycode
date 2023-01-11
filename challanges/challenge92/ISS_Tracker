@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+
+"""Returning the location of the ISS in latitude/longitude"""
+import requests
+import datetime
+import reverse_geocoder as rg
+
+URL= "http://api.open-notify.org/iss-now.json"
+def main():
+    resp= requests.get(URL).json()
+
+# part 2
+    lon= resp["iss_position"]["longitude"]
+    lat= resp["iss_position"]["latitude"]
+    epoch= resp["timestamp"]
+
+    # reverse_geocoder MUST be passed a tuple as the argument!
+    coords_tuple= (lat, lon)
+
+    result = rg.search(coords_tuple, verbose=False)
+                                 # verbose=False removes an annoying output that reads 
+                                 # "Loading formatted geocoded file..."
+
+    datetime_time = datetime.datetime.fromtimestamp(epoch)
+
+    print(f"""
+    CURRENT LOCATION OF THE ISS:
+    Timestamp: {datetime_time}
+    Lon: {lon}
+    Lat: {lat}
+    City/Country: {result[0].get('name')}, {result[0].get('cc')}
+    """)
+
+if __name__ == "__main__":
+    main()
+
+
