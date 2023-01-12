@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+
+import random
+import requests
+import html
+import time
+from string import ascii_lowercase
+
+URL= "https://opentdb.com/api.php?amount=10&category=20&difficulty=medium&type=multiple"
+URL_TF= "https://opentdb.com/api.php?amount=10&category=20&type=boolean"
+
+def main():
+
+    game_choice = ''
+    while game_choice == '':
+      game_choice = input("Would you like a T/F (tf) or a multiple choice triva (mc)? ")
+    
+
+    # data will be a python dictionary rendered from your API link's JSON!
+    data= requests.get(URL).json() if game_choice == 'mc' else requests.get(URL_TF).json()
+    
+    questions = data["results"]
+    incorrect_answer = questions
+    
+    for i, q in zip(range(len(questions)), questions):
+      print(html.unescape(f"{i+1} {q['question']}\n"))
+      
+      #copying incorect answers into new list
+      choice = q.get('incorrect_answers')
+      #adding correct answer to choice list
+      choice.append(q.get('correct_answer'))
+      #keeping correct answer to have for later
+      correct_answer = q.get('correct_answer')
+        
+      question_choices = dict(zip(ascii_lowercase, sorted(choice)))
+      #takes a lower case letter and choice list to mack a dict
+
+      
+      for letter, answer in question_choices.items():
+        for char in (html.unescape(f"{letter} {answer} \n")):
+          time.sleep(0.08)
+          print(char, end='',flush=True)
+        
+      # having player choose
+      answer_letter = input("\nChoice? ")
+      #storing answer from the user's input
+      answer = question_choices.get(answer_letter)
+      #validation of answer
+      if answer == correct_answer:
+          print("\nCorrect!\n")
+      else:
+          print(f"\nIncorrect, The answer is {correct_answer}\n")
+     
+    
+if __name__ == "__main__":
+    main()
+
+  
