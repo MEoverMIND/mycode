@@ -16,10 +16,13 @@ from flask import redirect
 from flask import url_for
 from flask import request
 from flask import render_template
-from flask_restful import Resource, Api
+from flask_restful import Resource, Api, reqparse
 
 app = Flask("AnimeAPI")
 api = Api(app)
+
+parser = reqparse.RequestParser()
+parser.add_argument('title', required=True)
 
 animes = {
         'anime1': {'title': 'Naruto'},
@@ -32,6 +35,12 @@ class Anime(Resource):
         if anime_id == "all":
             return animes
         return animes[anime_id]
+
+    def put(self, anime_id):
+        args = parser.parse_args()
+        new_anime = {'title': args['title']}
+        animes[anime_id] = new_anime
+        return {anime_id: animes[anime_id]}, 201
 
 
 api.add_resource(Anime, '/animes/<anime_id>')
